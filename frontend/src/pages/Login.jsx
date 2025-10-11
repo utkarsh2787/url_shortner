@@ -25,7 +25,7 @@ function Login() {
         setError('');
         setShowSnackbar(false);
         try {
-            const user = await dispatch(loginThunk({ email, password })).unwrap();
+            const user = await dispatch(loginThunk({email: form.email, password: form.password })).unwrap();
         } catch (err) {
             setError(err?.response?.data?.message || err.message || 'Login failed');
             setShowSnackbar(true);
