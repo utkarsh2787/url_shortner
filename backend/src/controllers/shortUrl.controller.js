@@ -5,13 +5,17 @@ import { getLongUrl } from "../dao/shortUrl.dao.js";
 import AppError from "../utils/errorHandler.js";
 
 const shortUrlCreate = async (req, res) => {
-    const { url } = req.body;
-    const id = await shortUrlIns(url);
-    if (!d) {
-        throw new Error("Error in generating short url");
-    }
-    else {
+    try {
+        console.log(req.body);
+        const { url } = req.body;
+        const id = await shortUrlIns(url, req.user?.id || 0);
+        console.log(id)
         res.send({ short_url: `${process.env.BASE_URL}/${id}` })
+
+    }
+    catch (err) {
+        console.log(err)
+        throw new AppError("internal server error"+ err, 500);
     }
 
 

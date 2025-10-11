@@ -1,7 +1,7 @@
 import ShortUrl from "../models/shorturl.model.js";
 
 export const saveShortUrl = async (fullUrl, shortUrl, userId) => {
-    const newShortUrl = new ShortUrl({ full_url: fullUrl, short_url: shortUrl });
+    const newShortUrl = new ShortUrl({ full_url: fullUrl, short_url: shortUrl, ...userId>0 && { user: userId } });
     if (userId) {
         newShortUrl.user = userId;
     }

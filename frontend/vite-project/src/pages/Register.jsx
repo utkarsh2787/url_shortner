@@ -27,7 +27,7 @@ function Register() {
         setError('');
         setShowSnackbar(false);
         try {
-            await dispatch(registerThunk({ username: form.username, email: form.email, password: form.password, avatarLink: form.avatarLink }));
+            await dispatch(registerThunk({ username: form.username, email: form.email, password: form.password, avatarLink: form.avatarLink })).unwrap();
         } catch (err) {
             setError(err?.response?.data?.message || err.message || 'Registration failed');
             setShowSnackbar(true);
